@@ -79,12 +79,14 @@ namespace MicroCred320
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
-            daysOnTerm = null;
-            daysOnTerm = new Dictionary<int, double>();
-            tbDetail.Text = "";
-            lbPaymentSum.Content = "Общая сумма выплаты: ";
-            lbPercentSum.Content = "Сумма процентов: ";
-            lbEffRate.Content = "Эффективная ставка: ";
+            result = null;
+            result = new List<string>();
+            tbxResult.Text = "";
+            tbxCreditSum.Text = "";
+            tbxCreditTerm.Text = "";
+            tbPaymentSum.Text = "Общая сумма выплаты: ";
+            tbCreditSum.Text = "Сумма процентов: ";
+            tbEffRate.Text = "Эффективная ставка: ";
         }
     }
 }
