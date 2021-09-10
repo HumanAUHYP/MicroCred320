@@ -20,6 +20,7 @@ namespace MicroCred320
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<string> result = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
@@ -27,18 +28,63 @@ namespace MicroCred320
 
         private void btnCalculate_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Calculate();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Неверный формат ввода");
+            }
+        }
+
+        public void Calculate()
+        {
             double loanSum = double.Parse(tbxCreditSum.Text);
             int term = int.Parse(tbxCreditTerm.Text);
 
             //Сделать ввод из текстового файла. Возможно словарь - день:процент. В тхт файле "от до %"
             double percent = 0.8;
+            result.Add("День\tСтавка\tДолг\tСумма выплаты");
+            if (term > 0)
+            {
+                double[] cumulatively = new double[term];
+                double[] payments = new double[term];
+                double cumu = 0;
 
-            double percentSum = loanSum * percent / 100 * term;
+                for (int i = 0; i < term; i++)
+                {
+                    cumu += (Convert.ToDouble(percent / 100) * loanSum);
+                    cumulatively[i] = cumu;
+                    payments[i] = cumu + loanSum;
+                    result.Add($"\n{i + 1}\t{percent}\t{cumulatively[i]}\t{payments[i]}");
+                }
+                if (cumulatively[term-1] >= loanSum * 1.5)
+                {
+                    MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
+                    return;
+                }
+                if (loanSum + cumulatively[term-1] >= 500000)
+                {
+                    MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
+                    return;
+                }
+                tbPaymentSum.Text = $"Общая сумма выплаты: {Convert.ToString(payments[term - 1])}";
+                tbCreditSum.Text = $"Сумма долга: {Convert.ToString(cumulatively[term - 1])}";
+                tbEffRate.Text = $"Эффективная ставка: {(((cumulatively[term - 1] / loanSum) / term) * 100)}";
+                tbxResult.Text = string.Join(Environment.NewLine, result);
+            }   
 
-            tbPaymentSum.Text = $"Общая сумма выплаты: {Convert.ToString(loanSum + percentSum)}";
-            tbCreditSum.Text = $"Сумма долга: {Convert.ToString(percentSum)}";
-            tbEffRate.Text = $"Эффективная ставка: {Convert.ToString(Math.Round(percentSum / loanSum / term * 100, 2))}";
-            tbxResult.Text = Convert.ToString(loanSum);
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            daysOnTerm = null;
+            daysOnTerm = new Dictionary<int, double>();
+            tbDetail.Text = "";
+            lbPaymentSum.Content = "Общая сумма выплаты: ";
+            lbPercentSum.Content = "Сумма процентов: ";
+            lbEffRate.Content = "Эффективная ставка: ";
         }
     }
 }

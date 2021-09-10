@@ -29,7 +29,7 @@
         <TextBlock x:Name="tbSum" Grid.Column="0" Grid.Row="1" Text="Сумма займа" FontSize="22" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
         <TextBlock x:Name="tbTerm"  Grid.Column="0" Grid.Row="2" Text="Срок займа" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Button x:Name="btnCalculate"  Grid.Column="0" Grid.Row="4" Content="Рассчитать" FontSize="22" Click="btnCalculate_Click"/>
-        <Button x:Name="btnReset"  Grid.Column="0" Grid.Row="5" Content="Сбросить" FontSize="22"/>
+        <Button x:Name="btnReset"  Grid.Column="0" Grid.Row="5" Content="Сбросить" FontSize="22" Click="btnReset_Click"/>
 
         <TextBox x:Name="tbxCreditSum" Grid.Column="1" Grid.Row="1" Margin="0,10,10,0" FontSize="22"/>
         <TextBox x:Name="tbxCreditTerm" Grid.Column="1" Grid.Row="2" Margin="0,5,10,5" FontSize="22"/>
