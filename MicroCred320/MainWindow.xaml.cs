@@ -73,7 +73,7 @@ namespace MicroCred320
                 tbCreditSum.Text = $"Сумма долга: {Convert.ToString(cumulatively[term - 1])}";
                 tbEffRate.Text = $"Эффективная ставка: {(((cumulatively[term - 1] / loanSum) / term) * 100)}";
                 tbxResult.Text = string.Join(Environment.NewLine, result);
-            }   
+            }
 
         }
 
@@ -87,6 +87,28 @@ namespace MicroCred320
             tbPaymentSum.Text = "Общая сумма выплаты: ";
             tbCreditSum.Text = "Сумма процентов: ";
             tbEffRate.Text = "Эффективная ставка: ";
+        }
+
+        private void TextSizeChanger(object sender, SizeChangedEventArgs e)
+        {
+            Size n = e.NewSize;
+            Size p = e.PreviousSize;
+            double l = n.Width / p.Width;
+            if (l != double.PositiveInfinity)
+            {
+                if (sender is TextBox)
+                {
+                    (sender as TextBox).FontSize *= l;
+                }
+                else if (sender is TextBlock)
+                {
+                    (sender as TextBlock).FontSize *= l;
+                }
+                else if (sender is Button)
+                {
+                    (sender as Button).FontSize *= l;
+                }
+            }
         }
     }
 }
