@@ -47,7 +47,7 @@ namespace MicroCred320
 
             //Сделать ввод из текстового файла. Возможно словарь - день:процент. В тхт файле "от до %"
             double percent = 0.8;
-            result.Add("День\tСтавка, %\tДолг, р\tСумма выплаты, р");
+            result.Add("День\tСтавка\tДолг\tСумма выплаты");
             if (term > 0)
             {
                 double[] cumulatively = new double[term];
