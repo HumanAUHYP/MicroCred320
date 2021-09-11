@@ -26,8 +26,8 @@
         </Grid.ColumnDefinitions>
 
         <Button x:Name="btnSave"  Grid.Column="0" Grid.Row="0" Content="Сохранить" FontSize="22" SizeChanged="TextSizeChanger"/>
-        <TextBlock x:Name="tbSum" Grid.Column="0" Grid.Row="1" Text="Сумма займа" FontSize="22" VerticalAlignment="Bottom" SizeChanged="TextSizeChanger" Margin="20,0,0,0"/>
-        <TextBlock x:Name="tbTerm"  Grid.Column="0" Grid.Row="2" Text="Срок займа" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger" Margin="20,0,0,0"/>
+        <TextBlock x:Name="tbSum" Grid.Column="0" Grid.Row="1" Text="Сумма займа, р" FontSize="22" VerticalAlignment="Bottom" SizeChanged="TextSizeChanger" Margin="20,0,0,0"/>
+        <TextBlock x:Name="tbTerm"  Grid.Column="0" Grid.Row="2" Text="Срок займа, дни" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger" Margin="20,0,0,0"/>
         <Button x:Name="btnCalculate"  Grid.Column="0" Grid.Row="4" Content="Рассчитать" FontSize="22" Click="btnCalculate_Click" SizeChanged="TextSizeChanger"/>
         <Button x:Name="btnReset"  Grid.Column="0" Grid.Row="5" Content="Сбросить" FontSize="22" Click="btnReset_Click" SizeChanged="TextSizeChanger"/>
 
@@ -35,8 +35,8 @@
         <TextBox x:Name="tbxCreditTerm" Grid.Column="1" Grid.Row="2" Margin="0,5,10,5" FontSize="22" SizeChanged="TextSizeChanger"/>
 
         <TextBox x:Name="tbxResult" Grid.Column="2" Grid.Row="0" Grid.RowSpan="7" FontSize="22" SizeChanged="TextSizeChanger"/>
-        <TextBlock x:Name="tbPaymentSum" Grid.Column="2" Grid.Row="7" Text="Общая сумма выплат" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger"/>
-        <TextBlock x:Name="tbCreditSum" Grid.Column="2" Grid.Row="8" Text="Сумма долга" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger"/>
-        <TextBlock x:Name="tbEffRate" Grid.Column="2" Grid.Row="9" Text="Еффективная ставка" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger"/>
+        <TextBlock x:Name="tbPaymentSum" Grid.Column="2" Grid.Row="7" Text="Общая сумма выплат, р" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger"/>
+        <TextBlock x:Name="tbCreditSum" Grid.Column="2" Grid.Row="8" Text="Сумма долга, р" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger"/>
+        <TextBlock x:Name="tbEffRate" Grid.Column="2" Grid.Row="9" Text="Эффективная ставка, %" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger"/>
     </Grid>
 </Window>
