@@ -25,7 +25,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="btnSave"  Grid.Column="0" Grid.Row="0" Content="Сохранить" FontSize="22" SizeChanged="TextSizeChanger"/>
+        <Button x:Name="btnSave"  Grid.Column="0" Grid.Row="0" Content="Сохранить" FontSize="22" SizeChanged="TextSizeChanger" Click="btnSave_Click"/>
         <TextBlock x:Name="tbSum" Grid.Column="0" Grid.Row="1" Text="Сумма займа" FontSize="22" VerticalAlignment="Bottom" SizeChanged="TextSizeChanger" Margin="20,0,0,0"/>
         <TextBlock x:Name="tbTerm"  Grid.Column="0" Grid.Row="2" Text="Срок займа" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger" Margin="20,0,0,0"/>
         <Button x:Name="btnCalculate"  Grid.Column="0" Grid.Row="4" Content="Рассчитать" FontSize="22" Click="btnCalculate_Click" SizeChanged="TextSizeChanger"/>

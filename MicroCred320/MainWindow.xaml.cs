@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using Microsoft.Win32;
 
 namespace MicroCred320
 {
@@ -57,7 +59,7 @@ namespace MicroCred320
                     cumu += (Convert.ToDouble(percent / 100) * loanSum);
                     cumulatively[i] = cumu;
                     payments[i] = cumu + loanSum;
-                    result.Add($"\n{i + 1}\t{percent}\t{cumulatively[i]}\t{payments[i]}");
+                    result.Add($"\n{i + 1}\t{percent}%\t{cumulatively[i]}p.\t{payments[i]}p.");
                 }
                 if (cumulatively[term-1] >= loanSum * 1.5)
                 {
@@ -69,9 +71,9 @@ namespace MicroCred320
                     MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
                     return;
                 }
-                tbPaymentSum.Text = $"Общая сумма выплаты: {Convert.ToString(payments[term - 1])}";
-                tbCreditSum.Text = $"Сумма долга: {Convert.ToString(cumulatively[term - 1])}";
-                tbEffRate.Text = $"Эффективная ставка: {(((cumulatively[term - 1] / loanSum) / term) * 100)}";
+                tbPaymentSum.Text = $"Общая сумма выплаты: {Convert.ToString(payments[term - 1])} p.";
+                tbCreditSum.Text = $"Сумма долга: {Convert.ToString(cumulatively[term - 1])} p.";
+                tbEffRate.Text = $"Эффективная ставка: {(((cumulatively[term - 1] / loanSum) / term) * 100)} %";
                 tbxResult.Text = string.Join(Environment.NewLine, result);
             }
 
@@ -107,6 +109,22 @@ namespace MicroCred320
                 else if (sender is Button)
                 {
                     (sender as Button).FontSize *= l;
+                }
+            }
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dlgSave = new SaveFileDialog();
+
+            dlgSave.Filter = "Текст (*.txt)|*.txt";
+
+            if (dlgSave.ShowDialog() == true)
+            {
+                using (StreamWriter sw = new StreamWriter(dlgSave.OpenFile(), Encoding.Default))
+                {
+                    sw.Write(tbxResult.Text);
+                    sw.Close();
                 }
             }
         }
