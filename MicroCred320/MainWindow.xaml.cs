@@ -25,6 +25,7 @@ namespace MicroCred320
     public partial class MainWindow : Window
     {
         private List<string> result = new List<string>();
+        private string rate;
         public MainWindow()
         {
             InitializeComponent();
@@ -48,20 +49,21 @@ namespace MicroCred320
             int term = int.Parse(tbxCreditTerm.Text);
 
             //Сделать ввод из текстового файла. Возможно словарь - день:процент. В тхт файле "от до %"
-            double percent = 0.8;
+            
             result.Add("День\tСтавка\tДолг\tСумма выплаты");
             if (term > 0)
             {
+                string[] persent = rate.Split(';');
                 double[] cumulatively = new double[term];
                 double[] payments = new double[term];
                 double cumu = 0;
 
                 for (int i = 0; i < term; i++)
                 {
-                    cumu += (Convert.ToDouble(percent / 100) * loanSum);
+                    cumu += ((Convert.ToDouble(persent[i]) / 100) * loanSum);
                     cumulatively[i] = cumu;
                     payments[i] = cumu + loanSum;
-                    result.Add($"\n{i + 1}\t{percent}%\t{cumulatively[i]}p.\t{payments[i]}p.");
+                    result.Add($"\n{i + 1}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
                 }
                 if (cumulatively[term-1] >= loanSum * 1.5)
                 {
@@ -157,6 +159,7 @@ namespace MicroCred320
                     fileContent = reader.ReadToEnd();
                 }
             }
+            rate = fileContent;
         }
     }
 }
