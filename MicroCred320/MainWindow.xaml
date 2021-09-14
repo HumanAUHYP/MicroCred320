@@ -29,7 +29,7 @@
         <Button x:Name="btnSave"  Grid.Column="0" Grid.Row="0" Content="Сохранить" FontSize="22" SizeChanged="TextSizeChanger" Foreground="White" Background="#FF252E36" BorderBrush="White" Click="btnSave_Click"/>
         <TextBlock x:Name="tbSum" Grid.Column="0" Grid.Row="1" Text="Сумма займа, р" FontSize="22" VerticalAlignment="Bottom" SizeChanged="TextSizeChanger" Margin="20,0,0,0" Foreground="White"/>
         <TextBlock x:Name="tbTerm"  Grid.Column="0" Grid.Row="2" Text="Срок займа, дни" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger" Margin="20,0,0,0" Foreground="White"/>
-        <Button x:Name="btnLoad"  Grid.Column="0" Grid.Row="2" Content="Загрузить" FontSize="22" SizeChanged="TextSizeChanger" Foreground="White" Background="#FF252E36" BorderBrush="White" Margin="0,46.8,0.2,46.8" Grid.RowSpan="3" Click="btnLoad_Click"/>
+        <Button x:Name="btnLoad"  Grid.Column="0" Grid.Row="3" Content="Загрузить" FontSize="22" SizeChanged="TextSizeChanger" Foreground="White" Background="#FF252E36" BorderBrush="White" Click="btnLoad_Click" />
         <Button x:Name="btnCalculate"  Grid.Column="0" Grid.Row="4" Content="Рассчитать" FontSize="22" Click="btnCalculate_Click" SizeChanged="TextSizeChanger" Foreground="White" Background="#FF252E36" BorderBrush="White"/>
         <Button x:Name="btnReset"  Grid.Column="0" Grid.Row="5" Content="Сбросить" FontSize="22" Click="btnReset_Click" SizeChanged="TextSizeChanger" Background="#FF252E36" Foreground="White" BorderBrush="White"/>
 
