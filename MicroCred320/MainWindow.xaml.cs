@@ -49,7 +49,6 @@ namespace MicroCred320
         {
             double loanSum = double.Parse(tbxCreditSum.Text);
             int term = int.Parse(tbxCreditTerm.Text);
-            double a = 0.9;
             date = DateTime.Today;
 
             //Сделать ввод из текстового файла. Возможно словарь - день:процент. В тхт файле "от до %"
@@ -100,12 +99,22 @@ namespace MicroCred320
                     
                     for (int i = 0; i < days; i++)
                     {
-                        cumu += ((Convert.ToDouble(a) / 100) * loanSum);
+                        cumu += ((Convert.ToDouble(persent[persent.Length-1]) / 100) * loanSum);
                         cumulatively[day] = cumu;
                         payments[day] = cumu + loanSum;
-                        result.Add($"\n{date.ToString("dd.MM")}\t{a}%\t{cumulatively[day]}p.\t{payments[day]}p.");
+                        result.Add($"\n{date.ToString("dd.MM")}\t{persent[persent.Length-1]}%\t{cumulatively[day]}p.\t{payments[day]}p.");
                         day++;
                         date = date.AddDays(1);
+                    }
+                    if (cumulatively[term - 1] >= loanSum * 1.5)
+                    {
+                        MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
+                        return;
+                    }
+                    if (loanSum + cumulatively[term - 1] >= 500000)
+                    {
+                        MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
+                        return;
                     }
 
                 }
