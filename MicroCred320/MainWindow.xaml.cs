@@ -57,7 +57,7 @@ namespace MicroCred320
 
                 //Сделать ввод из текстового файла. Возможно словарь - день:процент. В тхт файле "от до %"
 
-                result.Add("День\tСтавка\tДолг\tСумма выплаты");
+                result.Add("День\tДата\tСтавка\tДолг\tСумма выплаты");
                 if (term > 0)
                 {
                     string[] persent = rate.Split(';');
@@ -72,7 +72,7 @@ namespace MicroCred320
                             cumu += ((Convert.ToDouble(persent[i]) / 100) * loanSum);
                             cumulatively[i] = cumu;
                             payments[i] = cumu + loanSum;
-                            result.Add($"\n{date.ToString("dd.MM")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
+                            result.Add($"\n{i+1}\t{date.ToString("dd.MM.yy")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
                             day++;
                             date = date.AddDays(1);
                         }
@@ -85,7 +85,7 @@ namespace MicroCred320
                             cumu += ((Convert.ToDouble(persent[i]) / 100) * loanSum);
                             cumulatively[i] = cumu;
                             payments[i] = cumu + loanSum;
-                            result.Add($"\n{date.ToString("dd.MM")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
+                            result.Add($"\n{i+1}\t{date.ToString("dd.MM.yy")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
                             days--;
                             day++;
                             date = date.AddDays(1);
@@ -96,7 +96,7 @@ namespace MicroCred320
                             cumu += ((Convert.ToDouble(persent[persent.Length - 1]) / 100) * loanSum);
                             cumulatively[day] = cumu;
                             payments[day] = cumu + loanSum;
-                            result.Add($"\n{date.ToString("dd.MM")}\t{persent[persent.Length - 1]}%\t{cumulatively[day]}p.\t{payments[day]}p.");
+                            result.Add($"\n{day+1}\t{date.ToString("dd.MM.yy")}\t{persent[persent.Length - 1]}%\t{cumulatively[day]}p.\t{payments[day]}p.");
                             day++;
                             date = date.AddDays(1);
                         }
@@ -109,7 +109,7 @@ namespace MicroCred320
                             cumu += ((Convert.ToDouble(persent[i]) / 100) * loanSum);
                             cumulatively[i] = cumu;
                             payments[i] = cumu + loanSum;
-                            result.Add($"\n{date.ToString("dd.MM")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
+                            result.Add($"\n{i+1}\t{date.ToString("dd.MM.yy")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
                             day++;
                             date = date.AddDays(1);
                         }
