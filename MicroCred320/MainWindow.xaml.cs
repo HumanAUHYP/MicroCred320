@@ -187,13 +187,13 @@ namespace MicroCred320
         {
             var fileContent = string.Empty;
             var filePath = string.Empty;
-            string userName = Environment.UserName;
-            string path = String.Concat("c:\\", userName, "\\Documents\\plane");
+            string name = Environment.UserName;
+            string path = String.Concat("C:\\Users\\", name, "\\Documents\\plane\\");
 
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             
-                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.InitialDirectory = path;
                 openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
