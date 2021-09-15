@@ -53,7 +53,7 @@ namespace MicroCred320
             {
                 double loanSum = double.Parse(tbxCreditSum.Text);
                 int term = int.Parse(tbxCreditTerm.Text);
-                date = DateTime.Today;
+                date = dpDay.SelectedDate.Value;
 
                 //Сделать ввод из текстового файла. Возможно словарь - день:процент. В тхт файле "от до %"
 
@@ -222,6 +222,11 @@ namespace MicroCred320
         private void tbxCreditTerm_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !(Char.IsDigit(e.Text, 0));
+        }
+
+        private void dpDay_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MicroCred320"
         mc:Ignorable="d"
-        Title="MicroCredit" Height="550" Width="850" Background="#FF344451">
+        Title="MicroCredit" Height="550" Width="992.5" Background="#FF344451">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -26,19 +26,21 @@
         </Grid.ColumnDefinitions>
 
 
-        <Button x:Name="btnSave"  Grid.Column="0" Grid.Row="0" Content="Сохранить" FontSize="22" SizeChanged="TextSizeChanger" Foreground="White" Background="#FF252E36" BorderBrush="White" Click="btnSave_Click"/>
-        <TextBlock x:Name="tbSum" Grid.Column="0" Grid.Row="1" Text="Сумма займа, р" FontSize="22" VerticalAlignment="Bottom" SizeChanged="TextSizeChanger" Margin="20,0,0,0" Foreground="White"/>
-        <TextBlock x:Name="tbTerm"  Grid.Column="0" Grid.Row="2" Text="Срок займа, дни" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger" Margin="20,0,0,0" Foreground="White"/>
-        <Button x:Name="btnLoad"  Grid.Column="0" Grid.Row="3" Content="Загрузить" FontSize="22" SizeChanged="TextSizeChanger" Foreground="White" Background="#FF252E36" BorderBrush="White" Click="btnLoad_Click" />
-        <Button x:Name="btnCalculate"  Grid.Column="0" Grid.Row="4" Content="Рассчитать" FontSize="22" Click="btnCalculate_Click" SizeChanged="TextSizeChanger" Foreground="White" Background="#FF252E36" BorderBrush="White"/>
-        <Button x:Name="btnReset"  Grid.Column="0" Grid.Row="5" Content="Сбросить" FontSize="22" Click="btnReset_Click" SizeChanged="TextSizeChanger" Background="#FF252E36" Foreground="White" BorderBrush="White"/>
+        <Button x:Name="btnSave"  Grid.Column="0" Grid.Row="5" Content="Сохранить" FontSize="22" SizeChanged="TextSizeChanger" Foreground="White" Background="#FF252E36" BorderBrush="White" Click="btnSave_Click"/>
+        <TextBlock x:Name="tbSum" Grid.Column="0" Grid.Row="0" Text="Сумма займа, р" FontSize="22" VerticalAlignment="Bottom" SizeChanged="TextSizeChanger" Margin="20,0,0,0" Foreground="White"/>
+        <TextBlock x:Name="tbDay" Grid.Column="0" Grid.Row="2" Text="Дата начала" FontSize="22" VerticalAlignment="Bottom" SizeChanged="TextSizeChanger" Margin="20,0,0,0" Foreground="White"/>
+        <TextBlock x:Name="tbTerm"  Grid.Column="0" Grid.Row="1" Text="Срок займа, дни" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger" Margin="20,0,0,0" Foreground="White"/>
+        <Button x:Name="btnLoad"  Grid.Column="0" Grid.Row="4" Content="Загрузить" FontSize="22" SizeChanged="TextSizeChanger" Foreground="White" Background="#FF252E36" BorderBrush="White" Click="btnLoad_Click" />
+        <Button x:Name="btnCalculate"  Grid.Column="1" Grid.Row="4" Content="Рассчитать" FontSize="22" Click="btnCalculate_Click" SizeChanged="TextSizeChanger" Foreground="White" Background="#FF252E36" BorderBrush="White"/>
+        <Button x:Name="btnReset"  Grid.Column="1" Grid.Row="5" Content="Сбросить" FontSize="22" Click="btnReset_Click" SizeChanged="TextSizeChanger" Background="#FF252E36" Foreground="White" BorderBrush="White"/>
 
-        <TextBox x:Name="tbxCreditSum" Grid.Column="1" Grid.Row="1" Margin="0,10,10,0" FontSize="22" SizeChanged="TextSizeChanger" PreviewTextInput="tbxCreditSum_PreviewTextInput"/>
-        <TextBox x:Name="tbxCreditTerm" Grid.Column="1" Grid.Row="2" Margin="0,5,10,5" FontSize="22" SizeChanged="TextSizeChanger" PreviewTextInput="tbxCreditTerm_PreviewTextInput"/>
+        <TextBox x:Name="tbxCreditSum" Grid.Column="1" Grid.Row="0" Margin="0,10,10,0" FontSize="22" SizeChanged="TextSizeChanger" PreviewTextInput="tbxCreditSum_PreviewTextInput"/>
+        <TextBox x:Name="tbxCreditTerm" Grid.Column="1" Grid.Row="1" Margin="0,5,10,5" FontSize="22" SizeChanged="TextSizeChanger" PreviewTextInput="tbxCreditTerm_PreviewTextInput"/>
 
         <TextBox x:Name="tbxResult" IsReadOnly="True" Grid.Column="2" Grid.Row="0" Grid.RowSpan="7" FontSize="22" SizeChanged="TextSizeChanger" Background="#FF344451" Foreground="White"/>
         <TextBlock x:Name="tbPaymentSum" Grid.Column="2" Grid.Row="7" Text="Общая сумма выплат, р" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger" Foreground="White"/>
         <TextBlock x:Name="tbCreditSum" Grid.Column="2" Grid.Row="8" Text="Сумма долга, р" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger" Foreground="White"/>
         <TextBlock x:Name="tbEffRate" Grid.Column="2" Grid.Row="9" Text="Эффективная ставка, %" FontSize="22" VerticalAlignment="Center" SizeChanged="TextSizeChanger" Foreground="White"/>
+        <DatePicker x:Name="dpDay" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="214" Height="29" FirstDayOfWeek="Monday" Margin="0,10,0,0" SelectedDateChanged="dpDay_SelectedDateChanged"/>
     </Grid>
 </Window>
