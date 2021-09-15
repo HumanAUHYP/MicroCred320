@@ -76,16 +76,6 @@ namespace MicroCred320
                             day++;
                             date = date.AddDays(1);
                         }
-                        if (cumulatively[term - 1] >= loanSum * 1.5)
-                        {
-                            MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
-                            return;
-                        }
-                        if (loanSum + cumulatively[term - 1] >= 500000)
-                        {
-                            MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
-                            return;
-                        }
                     }
                     else if (persent.Length < term)
                     {
@@ -110,17 +100,29 @@ namespace MicroCred320
                             day++;
                             date = date.AddDays(1);
                         }
-                        if (cumulatively[term - 1] >= loanSum * 1.5)
-                        {
-                            MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
-                            return;
-                        }
-                        if (loanSum + cumulatively[term - 1] >= 500000)
-                        {
-                            MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
-                            return;
-                        }
 
+                    }
+                    else if (persent.Length > term)
+                    {
+                        for(int i = 0; i < term; i++)
+                        {
+                            cumu += ((Convert.ToDouble(persent[i]) / 100) * loanSum);
+                            cumulatively[i] = cumu;
+                            payments[i] = cumu + loanSum;
+                            result.Add($"\n{date.ToString("dd.MM")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
+                            day++;
+                            date = date.AddDays(1);
+                        }
+                    }
+                    if (cumulatively[term - 1] >= loanSum * 1.5)
+                    {
+                        MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
+                        return;
+                    }
+                    if (loanSum + cumulatively[term - 1] >= 500000)
+                    {
+                        MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
+                        return;
                     }
                     tbPaymentSum.Text = $"Общая сумма выплаты: {Convert.ToString(payments[term - 1])} p.";
                     tbCreditSum.Text = $"Сумма долга: {Convert.ToString(cumulatively[term - 1])} p.";
@@ -185,6 +187,8 @@ namespace MicroCred320
         {
             var fileContent = string.Empty;
             var filePath = string.Empty;
+            string userName = Environment.UserName;
+            string path = String.Concat("c:\\", userName, "\\Documents\\plane");
 
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
