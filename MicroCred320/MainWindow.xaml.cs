@@ -47,81 +47,86 @@ namespace MicroCred320
 
         public void Calculate()
         {
-            double loanSum = double.Parse(tbxCreditSum.Text);
-            int term = int.Parse(tbxCreditTerm.Text);
-            date = DateTime.Today;
-
-            //Сделать ввод из текстового файла. Возможно словарь - день:процент. В тхт файле "от до %"
-            
-            result.Add("День\tСтавка\tДолг\tСумма выплаты");
-            if (term > 0)
+            if (rate == null)
+                MessageBox.Show("Загрузите тарифный план");
+            else
             {
-                string[] persent = rate.Split(';');
-                double[] cumulatively = new double[term];
-                double[] payments = new double[term];
-                double cumu = 0;
-                int day = 0;
-                if (persent.Length == term)
-                {
-                    for (int i = 0; i < term; i++)
-                    {
-                        cumu += ((Convert.ToDouble(persent[i]) / 100) * loanSum);
-                        cumulatively[i] = cumu;
-                        payments[i] = cumu + loanSum;
-                        result.Add($"\n{date.ToString("dd.MM")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
-                        day++;
-                        date = date.AddDays(1);
-                    }
-                    if (cumulatively[term - 1] >= loanSum * 1.5)
-                    {
-                        MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
-                        return;
-                    }
-                    if (loanSum + cumulatively[term - 1] >= 500000)
-                    {
-                        MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
-                        return;
-                    }
-                }
-                else if (persent.Length < term)
-                {
-                    int days = term;
-                    for (int i = 0; i < persent.Length; i++)
-                    {
-                        cumu += ((Convert.ToDouble(persent[i]) / 100) * loanSum);
-                        cumulatively[i] = cumu;
-                        payments[i] = cumu + loanSum;
-                        result.Add($"\n{date.ToString("dd.MM")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
-                        days--;
-                        day++;
-                        date = date.AddDays(1);
-                    }
-                    
-                    for (int i = 0; i < days; i++)
-                    {
-                        cumu += ((Convert.ToDouble(persent[persent.Length-1]) / 100) * loanSum);
-                        cumulatively[day] = cumu;
-                        payments[day] = cumu + loanSum;
-                        result.Add($"\n{date.ToString("dd.MM")}\t{persent[persent.Length-1]}%\t{cumulatively[day]}p.\t{payments[day]}p.");
-                        day++;
-                        date = date.AddDays(1);
-                    }
-                    if (cumulatively[term - 1] >= loanSum * 1.5)
-                    {
-                        MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
-                        return;
-                    }
-                    if (loanSum + cumulatively[term - 1] >= 500000)
-                    {
-                        MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
-                        return;
-                    }
+                double loanSum = double.Parse(tbxCreditSum.Text);
+                int term = int.Parse(tbxCreditTerm.Text);
+                date = DateTime.Today;
 
+                //Сделать ввод из текстового файла. Возможно словарь - день:процент. В тхт файле "от до %"
+
+                result.Add("День\tСтавка\tДолг\tСумма выплаты");
+                if (term > 0)
+                {
+                    string[] persent = rate.Split(';');
+                    double[] cumulatively = new double[term];
+                    double[] payments = new double[term];
+                    double cumu = 0;
+                    int day = 0;
+                    if (persent.Length == term)
+                    {
+                        for (int i = 0; i < term; i++)
+                        {
+                            cumu += ((Convert.ToDouble(persent[i]) / 100) * loanSum);
+                            cumulatively[i] = cumu;
+                            payments[i] = cumu + loanSum;
+                            result.Add($"\n{date.ToString("dd.MM")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
+                            day++;
+                            date = date.AddDays(1);
+                        }
+                        if (cumulatively[term - 1] >= loanSum * 1.5)
+                        {
+                            MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
+                            return;
+                        }
+                        if (loanSum + cumulatively[term - 1] >= 500000)
+                        {
+                            MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
+                            return;
+                        }
+                    }
+                    else if (persent.Length < term)
+                    {
+                        int days = term;
+                        for (int i = 0; i < persent.Length; i++)
+                        {
+                            cumu += ((Convert.ToDouble(persent[i]) / 100) * loanSum);
+                            cumulatively[i] = cumu;
+                            payments[i] = cumu + loanSum;
+                            result.Add($"\n{date.ToString("dd.MM")}\t{persent[i]}%\t{cumulatively[i]}p.\t{payments[i]}p.");
+                            days--;
+                            day++;
+                            date = date.AddDays(1);
+                        }
+
+                        for (int i = 0; i < days; i++)
+                        {
+                            cumu += ((Convert.ToDouble(persent[persent.Length - 1]) / 100) * loanSum);
+                            cumulatively[day] = cumu;
+                            payments[day] = cumu + loanSum;
+                            result.Add($"\n{date.ToString("dd.MM")}\t{persent[persent.Length - 1]}%\t{cumulatively[day]}p.\t{payments[day]}p.");
+                            day++;
+                            date = date.AddDays(1);
+                        }
+                        if (cumulatively[term - 1] >= loanSum * 1.5)
+                        {
+                            MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
+                            return;
+                        }
+                        if (loanSum + cumulatively[term - 1] >= 500000)
+                        {
+                            MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
+                            return;
+                        }
+
+                    }
+                    tbPaymentSum.Text = $"Общая сумма выплаты: {Convert.ToString(payments[term - 1])} p.";
+                    tbCreditSum.Text = $"Сумма долга: {Convert.ToString(cumulatively[term - 1])} p.";
+                    tbEffRate.Text = $"Эффективная ставка: {(((cumulatively[term - 1] / loanSum) / term) * 100)} %";
+                    tbxResult.Text = string.Join(Environment.NewLine, result);
                 }
-                tbPaymentSum.Text = $"Общая сумма выплаты: {Convert.ToString(payments[term-1])} p.";
-                tbCreditSum.Text = $"Сумма долга: {Convert.ToString(cumulatively[term-1])} p.";
-                tbEffRate.Text = $"Эффективная ставка: {(((cumulatively[term-1] / loanSum) / term) * 100)} %";
-                tbxResult.Text = string.Join(Environment.NewLine, result);
             }
 
         }
