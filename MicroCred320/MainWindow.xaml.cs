@@ -204,5 +204,15 @@ namespace MicroCred320
             }
             rate = fileContent;
         }
+
+        private void tbxCreditSum_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(Char.IsDigit(e.Text, 0));
+        }
+
+        private void tbxCreditTerm_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(Char.IsDigit(e.Text, 0));
+        }
     }
 }
