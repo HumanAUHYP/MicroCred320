@@ -193,7 +193,8 @@ namespace MicroCred320
                     sw.Close();
                 }
             }
-            
+            Result taskWindow = new Result();
+            taskWindow.Show();
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
