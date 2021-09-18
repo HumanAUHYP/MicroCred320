@@ -27,6 +27,7 @@ namespace MicroCred320
         private List<string> result = new List<string>();
         private string rate;
         private DateTime date = new DateTime();
+        private string allRes;
         
         public MainWindow()
         {
@@ -124,6 +125,7 @@ namespace MicroCred320
                     tbCreditSum.Text = $"Сумма долга: {Convert.ToString(cumulatively[term - 1])} p.";
                     tbEffRate.Text = $"Эффективная ставка: {(((cumulatively[term - 1] / loanSum) / term) * 100)} %";
                     tbxResult.Text = string.Join(Environment.NewLine, result);
+                    allRes = $"\n{string.Join(Environment.NewLine, result)}\t{tbPaymentSum}\t{tbCreditSum}\t{tbEffRate}";
                     if (cumulatively[term - 1] >= loanSum * 1.5)
                     {
                         MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
@@ -149,6 +151,7 @@ namespace MicroCred320
             tbPaymentSum.Text = "Общая сумма выплаты: ";
             tbCreditSum.Text = "Сумма процентов: ";
             tbEffRate.Text = "Эффективная ставка: ";
+            allRes = "";
         }
 
         private void TextSizeChanger(object sender, SizeChangedEventArgs e)
@@ -190,6 +193,7 @@ namespace MicroCred320
                     sw.Close();
                 }
             }
+            
         }
 
         private void btnLoad_Click(object sender, RoutedEventArgs e)
