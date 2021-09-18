@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:MicroCred320"
         mc:Ignorable="d"
         Title="Result" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="tbxRes" HorizontalAlignment="Left" IsReadOnly="true" Height="399" Margin="28,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="718"/>
+    <Grid SizeChanged="TextSizeChanger">
+        <TextBox x:Name="tbxRes" FontSize="22" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" IsReadOnly="true" TextWrapping="Wrap" VerticalAlignment="Center" />
 
 
 
