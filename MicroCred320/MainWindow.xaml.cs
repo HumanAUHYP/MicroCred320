@@ -35,14 +35,19 @@ namespace MicroCred320
 
         private void btnCalculate_Click(object sender, RoutedEventArgs e)
         {
+            
             try
             {
-                Calculate();
+                if (tbxResult.Text == "")
+                    Calculate();
+                else
+                    MessageBox.Show("Сбросьте значения");
             }
             catch (FormatException)
             {
                 MessageBox.Show("Неверный формат ввода");
             }
+            
         }
 
         public void Calculate()
@@ -114,6 +119,11 @@ namespace MicroCred320
                             date = date.AddDays(1);
                         }
                     }
+                    
+                    tbPaymentSum.Text = $"Общая сумма выплаты: {Convert.ToString(payments[term - 1])} p.";
+                    tbCreditSum.Text = $"Сумма долга: {Convert.ToString(cumulatively[term - 1])} p.";
+                    tbEffRate.Text = $"Эффективная ставка: {(((cumulatively[term - 1] / loanSum) / term) * 100)} %";
+                    tbxResult.Text = string.Join(Environment.NewLine, result);
                     if (cumulatively[term - 1] >= loanSum * 1.5)
                     {
                         MessageBox.Show("Размер выплаты по микрозайму не может превышать 2,5-кратного размера суммы займа");
@@ -124,10 +134,6 @@ namespace MicroCred320
                         MessageBox.Show("Предельный размер долговой нагрузки на одно физическое лицо не может превышать 500 тыс. руб");
                         return;
                     }
-                    tbPaymentSum.Text = $"Общая сумма выплаты: {Convert.ToString(payments[term - 1])} p.";
-                    tbCreditSum.Text = $"Сумма долга: {Convert.ToString(cumulatively[term - 1])} p.";
-                    tbEffRate.Text = $"Эффективная ставка: {(((cumulatively[term - 1] / loanSum) / term) * 100)} %";
-                    tbxResult.Text = string.Join(Environment.NewLine, result);
                 }
             }
 
@@ -177,7 +183,10 @@ namespace MicroCred320
             {
                 using (StreamWriter sw = new StreamWriter(dlgSave.OpenFile(), Encoding.Default))
                 {
-                    sw.Write(tbxResult.Text);
+                    sw.WriteLine(tbxResult.Text);
+                    sw.WriteLine(tbPaymentSum.Text);
+                    sw.WriteLine(tbCreditSum.Text);
+                    sw.WriteLine(tbEffRate.Text);
                     sw.Close();
                 }
             }
